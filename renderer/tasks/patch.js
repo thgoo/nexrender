@@ -6,7 +6,7 @@ const async = require('async');
 
 function getAllExpressions(data) {
     let regex = /evalFile\(\"([\S\s]*?)\"\)/gi;
-    return regex.exec(data);
+    return data.match(regex);
 }
 
 /**
@@ -47,7 +47,6 @@ function processTemplateFile(project, callback) {
         // search for expressions
         let expressions = getAllExpressions(data);
 
-        delete expressions[0];
         // check for existing expressions
         if (expressions !== null) {
             // then iterate over them
